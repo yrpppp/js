@@ -11,10 +11,20 @@
   <div class="black-bg">
     <div class="white-bg">
       <h4>로그인하세요</h4>
-      <button class="btn btn-danger" id="close">닫기</button>
+      <form action="success.html">
+        <div class="my-3">
+          <input type="text" class="form-control" id="idd">
+         </div>
+         <div class="my-3">
+           <input type="password" class="form-control" id="psswrd">
+         </div>
+         <button type="submit" class="btn btn-primary" id="submit">전송</button> 
+         <button type="button" class="btn btn-danger" id="close">닫기</button>
+      </form> 
     </div>
   </div> 
   <button id="login">login</button>
+  <span class="badge bg-dark">Dark 🔄</span>
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <span class="navbar-brand">Navbar</span>
@@ -46,11 +56,66 @@
             // document.getElementsByClassName('list-group')[0].style.display='block';
             document.querySelectorAll('.list-group')[0].classList.toggle('show');
 
-        })
+        });
 
         $('#login,#close').on('click', function(){
           $('.black-bg').toggleClass('show');
-        })
+        });
+
+        //전송 버튼 눌렀을 때 인풋값이 없으면 알림창 띄워줘.
+        $('form').on('submit', function(e){
+          if($('#idd').val() == "") {
+            alert("이메일을 입력하세요");
+            e.preventDefault();
+          } else if($('#psswrd').val() == ""){
+            alert("비밀번호를 입력하세요");
+            e.preventDefault();
+          } else if($('#psswrd').val().length < 6){
+            alert("비밀번호는 6자 이상이어야합니다.");
+            e.preventDefault();
+          }
+         });
+
+         document.getElementById('idd').addEventListener('input', function(){
+          //input은 입력되는 즉시 작동, change는 포커스를 잃을 때 작동.
+          console.log($('#idd').val());
+         });
+
+         function tsnGame(숫자){
+          if(숫자%9 == 0){
+            console.log('박수박수');
+          } else if(숫자%3 ==0){
+            console.log('박수');
+          }
+         }
+         
+         function 공개사(점수1, 점수2){
+          if( 100 < 점수1 || 점수1 < 0 || 100 < 점수2 || 점수2 < 0){
+            alert('장난 ㄴㄴ');
+          } else if(점수1<40 || 점수2<40){
+            console.log('과락 탈락.');
+          } else if(점수1+점수2>=120){
+            console.log('합격');
+          } else {
+            console.log('탈락');
+          }
+         }
+
+         var count = 0;
+
+         $('.badge').on('click', function(){
+          count += 1;
+          console.log(count);
+          if(count%2 == 1){
+            $('.badge').html('Light 🎇');
+          }else{
+            $('.badge').html('Dark 🥐');
+          }
+         });
+
+         var 이름 = 'kim';
+         //선언, 할당, 범위
+
 
     </script>
 </body>

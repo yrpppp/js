@@ -7,8 +7,15 @@
 }
 .list-group {
     display: none;
+    overflow: hidden;
+    height: 0px;
+    transition: all 1s;
 }
-
+.list-group.show {
+    display: block;
+    overflow: visible;
+    height: 208px;
+}
 
 
 .black-bg {
