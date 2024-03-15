@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div onclick="document.getElementById('noti').style.display='none'" class="alert-box" id="noti">알림창</div>
+    <button onclick="openBtn('block')">열림</button>
+    <button onclick="openBtn('none')">닫기</button>
+</body>
+<script>
+    function openBtn(구멍) {
+        document.getElementById('noti').style.display=구멍;
+    }
+
+    function closeBtn() {
+        document.getElementById('noti').style.display="none";
+    }
+</script>
+</html>
