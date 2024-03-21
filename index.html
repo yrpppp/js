@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <style>
+    body {font-family: 'SUITE', sans-serif;}
+</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
 </head>
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE/fonts/static/woff2/SUITE.css" rel="stylesheet">
+
 <body>
   <div class="black-bg">
     <div class="white-bg">
@@ -27,7 +33,7 @@
   <span class="badge bg-dark">Dark 🔄</span>
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <span class="navbar-brand">Navbar</span>
+          <span class="navbar-brand">T I T L E</span>
           <button class="navbar-toggler" id="listBtn" type="button">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -42,6 +48,9 @@
         <li class="list-group-item">And a fifth one</li>
       </ul>
 
+      <div style="width:200px; height: 100px; overflow-y: scroll">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur praesentium exercitationem.
+      </div>
       <div class="main-bg">
         <h4>Shirts On Sale</h4>
         <button id="login" class="btn btn-danger">로그인</button>
@@ -67,35 +76,86 @@
         </div>
       </div>
     </div>
-
+    <button class="before">이전</button>
     <button class="slide-1">1</button>
     <button class="slide-2">2</button>
     <button class="slide-3">3</button>
-
+    <button class="next">다음</button>
+    <div style="height: 1000px"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script  src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
-      setTimeout(function(){
-        $('.alert').hide();
-      }, 5000);
 
-      let tickk = 5;
-      setInterval(function(){
-        tickk -= 1;
-        $('#tick').html(tickk);
-      }, 1000);
+      // setTimeout(function(){
+      //   $('.alert').hide();
+      // }, 5000);
+
+      // let tickk = 5;
+      // setInterval(function(){
+      //   tickk -= 1;
+      //   $('#tick').html(tickk);
+      // }, 1000);
+
+      //다음 버튼 누르면, 1번 화면이면 2번 화면이, 2번 화면이면 3번 화면이 노출되게 수정. 3번에서 누르면 처음으로 ? .
+      let curPic = 1;
+      $('.next').on('click', function(){
+        if(curPic == 1){
+          $('.slide-container').css('transform', 'translateX(-100vw)');
+          curPic +=1;
+        } else if(curPic == 2){
+          $('.slide-container').css('transform', 'translateX(-200vw)');
+          curPic +=1;
+        } else {
+          $('.slide-container').css('transform', 'translateX(0vw)');
+          curPic = 1;
+        }
+      })
+
+      $('.before').on('click', function(){
+        
+        $('.slide-container').css('transform', `translateX(-${curPic}00vw)`);
+      })
+
 
       $('.slide-1').on('click', function(){
-        $('.slide-container').css('transform', 'translateX(0vw)');               
+        $('.slide-container').css('transform', 'translateX(0vw)');
+        curPic = 1;
       })
       $('.slide-2').on('click', function(){
         $('.slide-container').css('transform', 'translateX(-100vw)');
+        curPic = 2;
       })
       $('.slide-3').on('click', function(){
         $('.slide-container').css('transform', 'translateX(-200vw)');
+        curPic = 3;
       })
 
+      function 함수(분,초){
+        let 값 = 0;
+        값 = 분*60000 + 초*1000;
+        return console.log(값);
+      }
+
+      함수(10,1);
+
+      function 할인함수(가격, 첫구매){
+        let 값 = 0;
+        값 = 가격 * 0.9;
+        if(첫구매){
+          값= parseFloat(값.toFixed(1))-1.5;
+        }
+        return console.log(값);
+      }
+
+      할인함수(100,true);
+
+      // let slider = 0;
+      // setInterval(function(){
+      //   slider += 1;
+      //   let mock = slider%3 +1;
+      //   $('.slide-'+mock).trigger("click");
+      // }, 2000);
 
       $('#send-answer').on('click',function(){
         if($('#answer').val() == '1355'){
@@ -110,7 +170,6 @@
         document.querySelector('#listBtn').addEventListener('click', function(){
             // document.getElementsByClassName('list-group')[0].style.display='block';
             document.querySelectorAll('.list-group')[0].classList.toggle('show');
-
         });
 
         $('#login,#close').on('click', function(){
@@ -192,12 +251,16 @@
           미래예금액 = 예금액 * 1.15* 1.15;
         }
         // console.log(미래예금액);
+        // console.log("total : "+ total);
 
         var first = 600;
         let total = 0;
 
         total = first + (first*2/3) + (first*2/3*2/30);
-        // console.log("total : "+ total);
+
+        window.addEventListener('scroll', function(){
+          console.log(window.scrollY);
+        });
 
     </script>
 </body>
